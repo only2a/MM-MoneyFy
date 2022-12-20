@@ -1,0 +1,1065 @@
+﻿<Window x:Class="MM_MoneyFy.View.AdminMoneyFy"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:MM_MoneyFy.View"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:ie="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:mtrchart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+        xmlns:vld="clr-namespace:MM_MoneyFy.Validation"
+        mc:Ignorable="d"
+        Title="AdminMoneyFy" x:Name="AdminMoneyFyWND" Height="800" MinHeight="770" MinWidth="1020"
+        Width="1424" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ImageBrush x:Key="tb_mouse_over"
+                    ImageSource="D:\2SEM\OOP\Labs\Lab6-7_WPF\Lab6-7_WPF\Assest\tgBtn_MouseOver.png"/>
+
+        <Style x:Key="font_style" TargetType="{x:Type TextBlock}">
+
+            <Setter Property="FontFamily"
+                    Value="Fonts/Roboto-Light.ttf #Roboto"/>
+
+            <Setter Property="VerticalAlignment"
+                    Value="Center"/>
+
+            <Setter Property="HorizontalAlignment"
+                    Value="Left"/>
+
+            <Setter Property="Foreground"
+                    Value="White"/>
+
+            <Setter Property="FontSize"
+                    Value="20"/>
+
+        </Style>
+
+        <Style TargetType="{x:Type ToolTip}" x:Key="tt_style">
+
+            <Setter Property="Placement" Value="Right"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Margin" Value="20,0,0,0"/>
+            <Setter Property="Background" Value="{DynamicResource LightColor}"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Fonts/Roboto-Light.ttf #Roboto"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="PlacementRectangle" Value="60,0,0,0"/>
+            <Setter Property="HorizontalOffset" Value="15"/>
+            <Setter Property="VerticalOffset" Value="6"/>
+            <Setter Property="HasDropShadow" Value="True"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
+        </Style>
+
+
+
+
+        <Style x:Key="tb_style" TargetType="{x:Type ToggleButton}">
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+
+                        <Border  x:Name="border"
+                                 BorderThickness="{TemplateBinding BorderThickness}"
+                                 Background="{TemplateBinding Background}"
+                                 SnapsToDevicePixels="True"/>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver" Value="true">
+
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                            </Trigger>
+
+                            <Trigger Property="IsChecked" Value="true">
+
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+
+            </Setter>
+
+        </Style>
+
+
+    </Window.Resources>
+    <Grid>
+        <Grid   x:Name="nav_pnl"
+                    
+                    Width="65"
+                    Background="{DynamicResource LightColor}"
+                    HorizontalAlignment="Left"
+                    Panel.ZIndex="1"
+                    >
+
+            <StackPanel x:Name="st_pnl">
+
+                <!--// Grid for the Menu Toggle Button //-->
+
+                <Grid Height="90" Background="{DynamicResource DarkColor}">
+
+                    <!--// Menu title text //-->
+
+                    <TextBlock  Grid.Row="1"
+                                    Grid.Column="0"
+                                    Margin="73,-20,0,0"
+                                    Text="M E N U"
+                                    Foreground="White"
+                                    FontSize="22"
+                                    Background="Transparent"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource font_style}">
+                            
+                            <!--// Shadow Effect //-->
+
+                        <TextBlock.Effect>
+
+                            <DropShadowEffect  BlurRadius="10"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="White"/>
+
+                        </TextBlock.Effect>
+
+                    </TextBlock>
+
+                    <!--// Toggle Button //-->
+
+                    <ToggleButton x:Name="Tg_Btn"
+                                      Grid.Column="0"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left"
+                                      Margin="18,-20,0,0"
+                                      Height="30"
+                                      Width="30"
+                                      BorderThickness="0"
+                                      Style="{StaticResource tb_style}" >
+
+                        <!--// Toggle button default background image 
+                            Unchecked="Tg_Btn_Unchecked" Checked="Tg_Btn_Checked"
+                            //-->
+
+                        <ToggleButton.Background>
+
+                            <ImageBrush ImageSource="D:\2SEM\OOP\Labs\Lab6-7_WPF\Lab6-7_WPF\Assest\tgBtn_default.png"
+                                            Stretch="None"/>
+
+                        </ToggleButton.Background>
+
+                        <!--// Toggle Button - Checked, Unchecked events //-->
+
+                        <ToggleButton.Triggers>
+
+                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+
+                                <BeginStoryboard>
+
+                                    <Storyboard x:Name="HideStackPanel">
+
+                                        <DoubleAnimation    
+                                                
+                                                Storyboard.TargetName="nav_pnl"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="230" To="65"
+                                                Duration="0:0:0.2"/>
+
+                                    </Storyboard>
+
+                                </BeginStoryboard>
+
+                            </EventTrigger>
+
+                            <EventTrigger RoutedEvent="ToggleButton.Checked">
+
+                                <BeginStoryboard>
+
+                                    <Storyboard x:Name="ShowStackPanel">
+
+                                        <DoubleAnimation
+                                                
+                                                Storyboard.TargetName="nav_pnl"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="65" To="230"
+                                                Duration="0:0:0.3"/>
+
+                                    </Storyboard>
+
+                                </BeginStoryboard>
+
+                            </EventTrigger>
+
+                        </ToggleButton.Triggers>
+
+
+                    </ToggleButton>
+
+                </Grid>
+
+                <ListView  x:Name="LV"
+                               BorderBrush="{x:Null}"
+                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                    <!--// Maps //-->
+
+
+                    <!--// Listview items style template //-->
+
+                    <ListView.ItemContainerStyle>
+
+                        <Style TargetType="{x:Type ListViewItem}">
+
+                            <Setter Property="Template">
+
+                                <Setter.Value>
+
+                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+
+                                        <Border x:Name="Bd"
+                                                    Height="50"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    Background="{TemplateBinding Background}"
+                                                    Padding="{TemplateBinding Padding}"
+                                                    SnapsToDevicePixels="True">
+
+                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                                        </Border>
+
+                                        <ControlTemplate.Triggers>
+
+                                            <MultiTrigger>
+
+                                                <MultiTrigger.Conditions>
+
+                                                    <Condition Property="IsMouseOver" Value="True"/>
+
+                                                </MultiTrigger.Conditions>
+
+                                                <Setter Property="Background"
+                                                            TargetName="Bd"
+                                                            Value="#FF313030"/>
+
+                                                <Setter Property="BorderBrush"
+                                                            TargetName="Bd"
+                                                            Value="#FF313030"/>
+
+                                            </MultiTrigger>
+
+                                        </ControlTemplate.Triggers>
+
+                                    </ControlTemplate>
+
+                                </Setter.Value>
+
+                            </Setter>
+
+                        </Style>
+
+                    </ListView.ItemContainerStyle>
+
+
+
+                    <!--// Services //-->
+
+                    <!--<ListViewItem x:Name="AdminElem1" HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
+                                      Visibility="Visible"
+                                      >
+
+                        --><!--// Tooltip //--><!--
+
+                        <ListViewItem.ToolTip>
+
+                            <ToolTip x:Name="tt_add"
+                                         Content="Главная"
+                                         Style="{StaticResource tt_style}"/>
+
+                        </ListViewItem.ToolTip>
+
+                        <StackPanel Orientation="Horizontal"
+                                        Width="230" >
+
+                            <Button BorderBrush="{x:Null}" 
+                                        Foreground="{x:Null}" 
+                                        Width="40" Height="40" Margin="10,0,0,0" Cursor="Hand"
+                                        Command="{Binding OpenServicesSettingsPage}"
+                                        CommandParameter="{Binding ElementName=MoneyFyWnd}">
+                                >
+                                <Button.Background>
+                                    <ImageBrush ImageSource="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\baseline_admin_panel_settings_white_24dp.png"/>
+                                </Button.Background>
+                            </Button>
+
+                            <TextBlock Text="Главная"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}"/>
+
+                        </StackPanel>
+
+                    </ListViewItem>-->
+
+                    <!--Settings --><!--
+                    <ListViewItem x:Name="AdminElem0" HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
+                                      Visibility="Visible"
+                                      >
+
+                        --><!--// Tooltip //--><!--
+
+                        <ListViewItem.ToolTip>
+
+                            <ToolTip x:Name="tt_settings"
+                                         Content="Настройки"
+                                         Style="{StaticResource tt_style}"/>
+
+                        </ListViewItem.ToolTip>
+
+                        <StackPanel Orientation="Horizontal"
+                                        Width="230" >
+
+                            <Button BorderBrush="{x:Null}" 
+                                        Foreground="{x:Null}" 
+                                        Width="40" Height="40" Margin="10,0,0,0" Cursor="Hand"
+                                        Command="{Binding OpenUserSettingsPage}"
+                                        CommandParameter="{Binding ElementName=MoneyFyWnd}">
+                                >
+                                <Button.Background>
+                                    <ImageBrush ImageSource="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\baseline_settings_white_24dp.png"/>
+                                </Button.Background>
+                            </Button>
+
+                            <TextBlock Text="Настройки"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}"/>
+
+                        </StackPanel>
+
+                    </ListViewItem>-->
+
+
+
+                    <!--// Sign out //-->
+
+                    <ListViewItem x:Name="Sign" HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
+                                      Visibility="Visible"
+                                      >
+
+                        <!--// Tooltip //-->
+
+                        <ListViewItem.ToolTip>
+
+                            <ToolTip x:Name="tt_signout"
+                                         Content="Sign Out"
+                                         Style="{StaticResource tt_style}"/>
+
+                        </ListViewItem.ToolTip>
+
+                        <StackPanel Orientation="Horizontal"
+                                        Width="230" >
+
+                            <Button BorderBrush="{x:Null}" 
+                                        Foreground="{x:Null}" 
+                                        Width="40" Height="40" Margin="10,0,0,0" Cursor="Hand"
+                                        Command="{Binding LogOut}"
+                                        CommandParameter="{Binding ElementName=AdminMoneyFyWND}"
+                                        >
+                                <Button.Background>
+                                    <ImageBrush ImageSource="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\baseline_logout_white_24dp.png"/>
+                                </Button.Background>
+
+                            </Button>
+
+                            <TextBlock Text="Sign Out"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}"/>
+
+                        </StackPanel>
+
+                    </ListViewItem>
+
+
+
+
+
+
+
+                </ListView>
+
+            </StackPanel>
+
+
+        </Grid>
+        <Grid Margin="65,0,0,0" Visibility="Visible">
+            <ScrollViewer>
+                <StackPanel>
+                    <GroupBox Margin="20"  
+                                      BorderBrush="{DynamicResource AverageColor}" materialDesign:ColorZoneAssist.Foreground="White"
+                                      Style="{StaticResource MaterialDesignGroupBox}" 
+                                      FontSize="20"  Foreground="White"
+                                      materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                      BorderThickness="1"  Visibility="Visible" >
+                        <GroupBox.Header>
+                            <Border Background="{DynamicResource AverageColor}" Margin="-10" >
+                                <Label Content="Пользователи" Foreground="White"></Label>
+                            </Border>
+                        </GroupBox.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <Label Content="Пользователи" FontWeight="Bold"></Label>
+                                <DataGrid x:Name="UsersDT" AutoGenerateColumns="False" 
+                                              ItemsSource="{Binding AllUsers}" CanUserResizeColumns="False" 
+                                              CanUserResizeRows="False" HorizontalScrollBarVisibility="Auto" 
+                                              CanUserAddRows="False" CanUserReorderColumns="False" CanUserDeleteRows="False" 
+                                              IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                              ScrollViewer.HorizontalScrollBarVisibility="Visible" SelectedItem="{Binding SelectedUser}">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu Background="#FF313030" Foreground="White">
+                                            <MenuItem Header="Удалить" Command="{Binding DeleteUser}" />
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                    <DataGrid.Columns>
+
+                                        <DataGridTextColumn Binding="{Binding Path=Name}" IsReadOnly="True" Header="Имя"/>
+                                        <DataGridTextColumn Binding="{Binding Path=Login}" IsReadOnly="True" Header="Почта"/>
+
+                                    </DataGrid.Columns>
+                                    <!--<i:Interaction.Triggers >
+                                    <i:EventTrigger EventName="SelectionChanged" >
+                                        <ie:CallMethodAction TargetObject="{Binding}" MethodName="OperationsOfthisCategory"  />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>-->
+                                </DataGrid>
+                            </StackPanel>
+                            <!--<StackPanel Grid.Column="1">
+                                <Label Content="Сотрудники" FontWeight="Bold"></Label>
+                                <DataGrid x:Name="StaffDT" AutoGenerateColumns="False" 
+                                              ItemsSource="{Binding AllStaff}" CanUserResizeColumns="False" 
+                                              CanUserResizeRows="False" HorizontalScrollBarVisibility="Auto" 
+                                              CanUserAddRows="False" CanUserReorderColumns="False" CanUserDeleteRows="False" 
+                                              IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                              ScrollViewer.HorizontalScrollBarVisibility="Visible" SelectedItem="{Binding SelectedStaff}">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu Background="#FF313030" Foreground="White">
+                                            <MenuItem Header="Удалить" Command="{Binding DeleteSTaff}" />
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                    <DataGrid.Columns>
+
+                                        <DataGridTextColumn Binding="{Binding Path=Name}" IsReadOnly="True" Header="Имя"/>
+                                        <DataGridTextColumn Binding="{Binding Path=Login}" IsReadOnly="True" Header="Почта"/>
+                                        <DataGridTextColumn Binding="{Binding Path=Position}" IsReadOnly="True" Header="Специальность"/>
+
+                                    </DataGrid.Columns>
+                                    --><!--<i:Interaction.Triggers >
+                                    <i:EventTrigger EventName="SelectionChanged" >
+                                        <ie:CallMethodAction TargetObject="{Binding}" MethodName="OperationsOfthisCategory"  />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>--><!--
+                                </DataGrid>
+                            </StackPanel>-->
+
+                        </Grid>
+
+                    </GroupBox>
+
+
+                    <GroupBox Margin="20"  
+                                      BorderBrush="{DynamicResource AverageColor}" materialDesign:ColorZoneAssist.Foreground="White"
+                                      Style="{StaticResource MaterialDesignGroupBox}" 
+                                      FontSize="20"  Foreground="White"
+                                      materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                      BorderThickness="1"  Visibility="Visible" >
+                        <GroupBox.Header>
+                            <Border Background="{DynamicResource AverageColor}" Margin="-10" >
+                                <Label Content="Категории"  Foreground="White"></Label>
+                            </Border>
+                        </GroupBox.Header>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <Label Content="Категории доходов" FontWeight="Bold"></Label>
+                                <DataGrid x:Name="IncCategories" AutoGenerateColumns="False" 
+                                              ItemsSource="{Binding AllIncomesCategories}" CanUserResizeColumns="False" 
+                                              CanUserResizeRows="False" HorizontalScrollBarVisibility="Auto" 
+                                              CanUserAddRows="False" CanUserReorderColumns="False" CanUserDeleteRows="False" 
+                                              IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                              ScrollViewer.HorizontalScrollBarVisibility="Visible" SelectedItem="{Binding SelectedCategory}">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu Background="#FF313030" Foreground="White">
+                                            <MenuItem Header="Редактировать" Command="{Binding OpenEditCategory}"/>
+                                            <MenuItem Header="Удалить" Command="{Binding DeleteCategory}" />
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn >
+                                            <!--IsReadOnly="True"-->
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Image Width="25" Height="25" Source="{Binding Path=IconPath}"
+                                           />
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Binding="{Binding Path=Name}" IsReadOnly="True" Header="Категория"/>
+
+                                    </DataGrid.Columns>
+                                    <!--<i:Interaction.Triggers >
+                                    <i:EventTrigger EventName="SelectionChanged" >
+                                        <ie:CallMethodAction TargetObject="{Binding}" MethodName="OperationsOfthisCategory"  />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>-->
+                                </DataGrid>
+                                <Button HorizontalAlignment="Center" Content="Создать" Command="{Binding OpenAddCategory}"></Button>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <Label Content="Категории расходов" FontWeight="Bold"></Label>
+                                <DataGrid x:Name="WstCategories" AutoGenerateColumns="False" 
+                                              ItemsSource="{Binding AllWastesCategories}" CanUserResizeColumns="False" 
+                                              CanUserResizeRows="False" HorizontalScrollBarVisibility="Auto" 
+                                              CanUserAddRows="False" CanUserReorderColumns="False" CanUserDeleteRows="False" 
+                                              IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                              ScrollViewer.HorizontalScrollBarVisibility="Visible" SelectedItem="{Binding SelectedCategory}">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu Background="#FF313030" Foreground="White">
+                                            <MenuItem Header="Редактировать" Command="{Binding OpenEditCategory}"/>
+                                            <MenuItem Header="Удалить" Command="{Binding DeleteCategory}" />
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn >
+                                            <!--IsReadOnly="True"-->
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Image Width="25" Height="25" Source="{Binding Path=IconPath}"
+                                           />
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Binding="{Binding Path=Name}" IsReadOnly="True" Header="Категория"/>
+                                    </DataGrid.Columns>
+                                    <!--<i:Interaction.Triggers >
+                                    <i:EventTrigger EventName="SelectionChanged" >
+                                        <ie:CallMethodAction TargetObject="{Binding}" MethodName="OperationsOfthisCategory"  />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>-->
+                                </DataGrid>
+                                <Button HorizontalAlignment="Center" Content="Создать" Command="{Binding OpenAddCategory}"></Button>
+                            </StackPanel>
+
+                        </Grid>
+
+
+                    </GroupBox>
+
+                    <StackPanel Orientation="Horizontal">
+
+
+
+
+
+                        <GroupBox  BorderBrush="{DynamicResource AverageColor}" materialDesign:ColorZoneAssist.Foreground="White"
+                                      Style="{StaticResource MaterialDesignGroupBox}" 
+                                      FontSize="20"  Foreground="White" Margin="20"
+                                      materialDesign:ShadowAssist.ShadowDepth="Depth3" ScrollViewer.CanContentScroll="True"
+                                      BorderThickness="1"  Visibility="Visible" Height="300" ScrollViewer.VerticalScrollBarVisibility="Visible" >
+                            <GroupBox.Header>
+                                <Border Background="{DynamicResource AverageColor}" Margin="-10" >
+                                    <Label Content="Иконки"  Foreground="White"></Label>
+                                </Border>
+                            </GroupBox.Header>
+                            <StackPanel>
+                                <DataGrid x:Name="BankIcons" AutoGenerateColumns="False" 
+                                              ItemsSource="{Binding AllIcons}" CanUserResizeColumns="False" 
+                                              CanUserResizeRows="False" HorizontalScrollBarVisibility="Auto"  Height="200"
+                                              CanUserAddRows="False" CanUserReorderColumns="False" CanUserDeleteRows="False" 
+                                              IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True"
+                                              ScrollViewer.HorizontalScrollBarVisibility="Visible" SelectedItem="{Binding SelectedIcon}">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu Background="#FF313030" Foreground="White">
+                                            <MenuItem Header="Редактировать" Command="{Binding OpenEditIcon}"/>
+                                            <MenuItem Header="Удалить" Command="{Binding DeleteIcon}"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn >
+                                            <!--IsReadOnly="True"-->
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Image Width="35" Height="25" Source="{Binding Path=IconPath}"
+                                           />
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Binding="{Binding Path=Name}" IsReadOnly="True" Header="Название"/>
+                                    </DataGrid.Columns>
+                                    <!--<i:Interaction.Triggers >
+                                    <i:EventTrigger EventName="SelectionChanged" >
+                                        <ie:CallMethodAction TargetObject="{Binding}" MethodName="OperationsOfthisCategory"  />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>-->
+                                </DataGrid>
+                                <Button HorizontalAlignment="Center" Content="Создать" Command="{Binding OpenAddIcon}"></Button>
+                            </StackPanel>
+
+                        </GroupBox>
+
+                        <GroupBox  BorderBrush="{DynamicResource AverageColor}" materialDesign:ColorZoneAssist.Foreground="White"
+                                      Style="{StaticResource MaterialDesignGroupBox}" 
+                                      FontSize="20"  Foreground="White" Margin="20"
+                                      materialDesign:ShadowAssist.ShadowDepth="Depth3" ScrollViewer.CanContentScroll="True"
+                                      BorderThickness="1"  Visibility="Visible" Height="300" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                            <GroupBox.Header>
+                                <Border Background="{DynamicResource AverageColor}" Margin="-10" >
+                                    <Label Content="Валюта"  Foreground="White"></Label>
+                                </Border>
+                            </GroupBox.Header>
+                            <StackPanel>
+                                <DataGrid x:Name="CurrencyDT" AutoGenerateColumns="False" Height="200"
+                                              ItemsSource="{Binding Currencies}" CanUserResizeColumns="False" 
+                                              CanUserResizeRows="False" HorizontalScrollBarVisibility="Auto" 
+                                              CanUserAddRows="False" CanUserReorderColumns="False" CanUserDeleteRows="False" 
+                                              IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True"
+                                              ScrollViewer.HorizontalScrollBarVisibility="Visible" SelectedItem="{Binding SelectedCurrency}">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu Background="#FF313030" Foreground="White">
+                                            <MenuItem Header="Редактировать" Command="{Binding OpenEditCurrency}"/>
+                                            <MenuItem Header="Удалить" Command="{Binding DeleteCurrency}" />
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                    <DataGrid.Columns>
+
+                                        <DataGridTextColumn Binding="{Binding Path=Name}" IsReadOnly="True" Header="Название"/>
+                                    </DataGrid.Columns>
+                                    <!--<i:Interaction.Triggers >
+                                    <i:EventTrigger EventName="SelectionChanged" >
+                                        <ie:CallMethodAction TargetObject="{Binding}" MethodName="OperationsOfthisCategory"  />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>-->
+                                </DataGrid>
+                                <Button HorizontalAlignment="Center" Content="Создать" Command="{Binding OpenAddCurrency}"></Button>
+                            </StackPanel>
+
+
+                        </GroupBox>
+                        <GroupBox  BorderBrush="{DynamicResource AverageColor}" materialDesign:ColorZoneAssist.Foreground="White"
+                                      Style="{StaticResource MaterialDesignGroupBox}" 
+                                      FontSize="20"  Foreground="White" Margin="20"
+                                      materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                      BorderThickness="1"  Visibility="Visible" Height="300" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                            <GroupBox.Header>
+                                <Border Background="{DynamicResource AverageColor}" Margin="-10" >
+                                    <Label Content="Счета"  Foreground="White"></Label>
+                                </Border>
+                            </GroupBox.Header>
+                            <DataGrid x:Name="Accounts" AutoGenerateColumns="False" 
+                                              ItemsSource="{Binding AllAccounts}" CanUserResizeColumns="False" 
+                                              CanUserResizeRows="False" HorizontalScrollBarVisibility="Auto" 
+                                              CanUserAddRows="False" CanUserReorderColumns="False" CanUserDeleteRows="False" 
+                                              IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                              ScrollViewer.HorizontalScrollBarVisibility="Visible" SelectedItem="{Binding SelectedAccount}">
+
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn >
+                                        <!--IsReadOnly="True"-->
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Width="35" Height="25" Source="{Binding Path=IconPath}"
+                                           />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Binding="{Binding Path=Name}" IsReadOnly="True" Header="Название"/>
+                                    <DataGridTextColumn Binding="{Binding Path=Balance}" IsReadOnly="True" Header="Баланс BYN"/>
+                                    <DataGridTextColumn Binding="{Binding Path=UserName}" IsReadOnly="True" Header="Пользователь"/>
+                                </DataGrid.Columns>
+                                <!--<i:Interaction.Triggers >
+                                    <i:EventTrigger EventName="SelectionChanged" >
+                                        <ie:CallMethodAction TargetObject="{Binding}" MethodName="OperationsOfthisCategory"  />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>-->
+                            </DataGrid>
+
+                        </GroupBox>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+
+        </Grid>
+        <Grid x:Name="AdminPagesGrid" Visibility="Visible">
+            <Grid x:Name="BackGrid" Margin="400"  Background="Gray" Opacity="0.3">
+
+            </Grid>
+
+            <Grid x:Name="GridWhithPages" HorizontalAlignment="Center" Background="WhiteSmoke" VerticalAlignment="Top" Opacity="1" Height="0" Panel.ZIndex="999">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+
+
+                <Frame x:Name="Pages" Grid.Row="0" NavigationUIVisibility="Hidden" Width="500"></Frame>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" >
+                    <Button Width="150" Height="45" 
+                                Content="Изменить" Margin="0,0,10,0"
+                                FontSize="20"
+                                Command="{Binding Edit}"
+                                CommandParameter="{Binding ElementName=MoneyFyWnd}"
+                                ></Button>
+                    <Button Width="150" Height="45" 
+                                Content="Отмена" Margin="0,0,10,0"
+                                FontSize="20"
+                                Command="{Binding CloseEditGrid}"
+                                CommandParameter="{Binding ElementName=MoneyFyWnd}"
+                                ></Button>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+        <materialDesign:Card Margin="65,0,0,0" HorizontalAlignment="Left" x:Name="Add"  Background="White" 
+                             materialDesign:ShadowAssist.ShadowDepth="Depth5" Visibility="Collapsed" Width="0" >
+            <Grid  HorizontalAlignment="Left"   Background="White" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Margin="0,10,10,10" Content="Добавление категории" Foreground="{DynamicResource AverageColor}" FontSize="20" FontWeight="Bold"></Label>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="117*"></RowDefinition>
+                        <RowDefinition Height="108*"></RowDefinition>
+                        <RowDefinition Height="127*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="CategoryName" Margin="5,39,5,38" materialDesign:HintAssist.Hint="Название категории" FontSize="16" >
+                        <TextBox.Text>
+                            <Binding Path="CategoryName" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+
+                    </TextBox>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,117,0,0" Grid.RowSpan="2" Width="83">
+                        <ComboBox x:Name="IconBlock"  Height="50" 
+                              ItemsSource="{Binding AllCategoryIcons}"
+                              SelectedItem="{Binding CategoryIcon}"
+                              FontSize="18" FontWeight="Bold"
+                              materialDesign:HintAssist.Hint="Иконка"
+                              Style="{StaticResource MaterialDesignComboBox}">
+                            <ComboBox.ItemTemplate>
+                                <ItemContainerTemplate>
+                                    <Image Source="{Binding Path=IconPath}" Height="35" Width="25"></Image>
+                                </ItemContainerTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                    <TextBox x:Name="TypeCategory" Grid.Row="2" Margin="5,40,5,39" materialDesign:HintAssist.Hint="Тип категории" FontSize="16" >
+                        <TextBox.Text>
+                            <Binding Path="Types" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+
+                    </TextBox>
+                </Grid>
+                <StackPanel Grid.Row="2">
+                    <Button VerticalAlignment="Top" Margin="5" Content="Добавить"
+                            Command="{Binding AddCategory}">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="3"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource AverageColor}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Style.Triggers>
+
+                                    <MultiDataTrigger>
+
+                                        <MultiDataTrigger.Conditions>
+                                            <!--<Condition Binding="{Binding Path=(Validation.HasError), ElementName=Name}" Value="True"/>-->
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=CategoryName}" Value="True"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter Property="IsEnabled" Value="False"/>
+
+                                        </MultiDataTrigger.Setters>
+
+
+                                    </MultiDataTrigger>
+
+
+                                    <MultiDataTrigger>
+
+                                        <MultiDataTrigger.Conditions>
+                                            <!--<Condition Binding="{Binding Path=(Validation.HasError), ElementName=Name}" Value="True"/>-->
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=TypeCategory}" Value="True"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter Property="IsEnabled" Value="False"/>
+
+                                        </MultiDataTrigger.Setters>
+
+
+                                    </MultiDataTrigger>
+
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding ElementName=CategoryName, Path=Text.Length}" Value="0" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </MultiDataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding ElementName=TypeCategory, Path=Text.Length}" Value="0" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button VerticalAlignment="Top" Margin="5" Content="Отмена" Command="{Binding Close}" CommandParameter="{Binding ElementName=AdminMoneyFyWND}" Cursor="Hand">
+
+                        <i:Interaction.Triggers >
+                            <i:EventTrigger EventName="Click" >
+                                <ie:CallMethodAction TargetObject="{Binding}" MethodName="Close"  />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+
+        </materialDesign:Card>
+        <materialDesign:Card Margin="65,0,0,0" HorizontalAlignment="Left" Name="Add2"  Background="White"
+                             materialDesign:ShadowAssist.ShadowDepth="Depth5" Visibility="Collapsed" Width="0">
+            <Grid  HorizontalAlignment="Left"  Width="250" Background="White" materialDesign:ShadowAssist.ShadowDepth="Depth5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Margin="0,10,10,10" Content="Добавление иконки" Foreground="{DynamicResource AverageColor}" FontSize="20" FontWeight="Bold"></Label>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="BankName"
+                           Height="40" Margin="5" materialDesign:HintAssist.Hint="Название иконки" FontSize="16" >
+                        <TextBox.Text>
+                            <Binding Path="IconName" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+                        <Button Margin="5" Content="Иконка" Command="{Binding AddIcon}"></Button>
+                        <Image Margin="5" Source="{Binding IconPath}"></Image>
+                    </StackPanel>
+                    <TextBox x:Name="Type" Grid.Row="2"
+                           Height="40" Margin="5" materialDesign:HintAssist.Hint="Тип иконки" FontSize="16" >
+                        <TextBox.Text>
+                            <Binding Path="IconType" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </Grid>
+                <StackPanel Grid.Row="2">
+                    <Button VerticalAlignment="Top" Margin="5" Content="Добавить"
+                            Command="{Binding AddBankIcon}">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="3"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource AverageColor}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Style.Triggers>
+
+                                    <MultiDataTrigger>
+
+                                        <MultiDataTrigger.Conditions>
+                                            <!--<Condition Binding="{Binding Path=(Validation.HasError), ElementName=Name}" Value="True"/>-->
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=BankName}" Value="True"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter Property="IsEnabled" Value="False"/>
+
+                                        </MultiDataTrigger.Setters>
+
+
+                                    </MultiDataTrigger>
+
+
+
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding ElementName=BankName, Path=Text.Length}" Value="0" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button VerticalAlignment="Top" Margin="5" Content="Отмена">
+                        <i:Interaction.Triggers >
+                            <i:EventTrigger EventName="Click" >
+                                <ie:CallMethodAction TargetObject="{Binding}" MethodName="Close3"  />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+
+        </materialDesign:Card>
+        <materialDesign:Card Margin="65,0,0,0" HorizontalAlignment="Left" Name="Add3"  Background="White" materialDesign:ShadowAssist.ShadowDepth="Depth5" Visibility="Collapsed" Width="0">
+            <Grid  HorizontalAlignment="Left"  Width="250" Background="White" materialDesign:ShadowAssist.ShadowDepth="Depth5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"></RowDefinition>
+                    <RowDefinition Height="35*"></RowDefinition>
+                    <RowDefinition Height="141*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Margin="0,10,10,10" Content="Добавление валюты" Foreground="{DynamicResource AverageColor}" FontSize="20" FontWeight="Bold"></Label>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="CurrencName" Grid.Row="0"
+                           Height="40" Margin="5" materialDesign:HintAssist.Hint="Название валюты" FontSize="16" >
+                        <Binding Path="CurrencyName" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vld:RegexValidationRule
+                                        RegexText="(([A-Z][a-z]*)|([А-Я][а-я]*))$$"
+                                        ErrorMessage="Неккоректно введены данные"
+                                        RegexOptions="IgnoreCase">
+                                </vld:RegexValidationRule>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
+                </Grid>
+                <StackPanel Grid.Row="2" Margin="0,8,0,0">
+                    <Button VerticalAlignment="Top" Margin="5" Content="Добавить"
+                            Command="{Binding AddCurrency}">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="3"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{DynamicResource AverageColor}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Style.Triggers>
+
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <!--<Condition Binding="{Binding Path=(Validation.HasError), ElementName=Name}" Value="True"/>-->
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=CurrencyName}" Value="True"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <!--<Condition Binding="{Binding Path=(Validation.HasError), ElementName=Name}" Value="True"/>-->
+                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=CurrencyRate}" Value="True"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+
+
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding ElementName=CurrencyName, Path=Text.Length}" Value="0" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </MultiDataTrigger>
+
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding ElementName=CurrencyRate, Path=Text.Length}" Value="0" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button VerticalAlignment="Top" Margin="5" Content="Отмена">
+                        <i:Interaction.Triggers >
+                            <i:EventTrigger EventName="Click" >
+                                <ie:CallMethodAction TargetObject="{Binding}" MethodName="Close2"  />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+
+        </materialDesign:Card>
+        <Frame NavigationUIVisibility="Hidden" x:Name="frameForPagesAdm" Height="Auto" Margin="65,0,0,0" Visibility="Collapsed"></Frame>
+    </Grid>
+</Window>

@@ -1,0 +1,1160 @@
+﻿<Window x:Class="MM_MoneyFy.View.MoneyFy"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:MM_MoneyFy.View"
+        xmlns:mtrchart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+        xmlns:vld="clr-namespace:MM_MoneyFy.Validation"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      xmlns:ie="http://schemas.microsoft.com/expression/2010/interactions"
+        mc:Ignorable="d"
+        x:Name="MoneyFyWnd"
+        Title="MoneyFY" Height="800" MinHeight="670" MinWidth="1020" Icon="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\logo.png"
+        Width="1424" WindowStartupLocation="CenterScreen" WindowStyle="None">
+
+    <Window.Resources>
+        <ImageBrush x:Key="tb_mouse_over"
+                    ImageSource="D:\2SEM\OOP\Labs\Lab6-7_WPF\Lab6-7_WPF\Assest\tgBtn_MouseOver.png"/>
+
+        <Style x:Key="font_style" TargetType="{x:Type TextBlock}">
+
+            <Setter Property="FontFamily"
+                    Value="Fonts/Roboto-Light.ttf #Roboto"/>
+
+            <Setter Property="VerticalAlignment"
+                    Value="Center"/>
+
+            <Setter Property="HorizontalAlignment"
+                    Value="Left"/>
+
+            <Setter Property="Foreground"
+                    Value="White"/>
+
+            <Setter Property="FontSize"
+                    Value="20"/>
+
+        </Style>
+
+        <Style TargetType="{x:Type ToolTip}" x:Key="tt_style">
+
+            <Setter Property="Placement" Value="Right"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Margin" Value="20,0,0,0"/>
+            <Setter Property="Background" Value="{DynamicResource LightColor}"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Fonts/Roboto-Light.ttf #Roboto"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="PlacementRectangle" Value="60,0,0,0"/>
+            <Setter Property="HorizontalOffset" Value="15"/>
+            <Setter Property="VerticalOffset" Value="6"/>
+            <Setter Property="HasDropShadow" Value="True"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
+        </Style>
+
+
+
+
+        <Style x:Key="tb_style" TargetType="{x:Type ToggleButton}">
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+
+                        <Border  x:Name="border"
+                                 BorderThickness="{TemplateBinding BorderThickness}"
+                                 Background="{TemplateBinding Background}"
+                                 SnapsToDevicePixels="True"/>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver" Value="true">
+
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                            </Trigger>
+
+                            <Trigger Property="IsChecked" Value="true">
+
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+
+            </Setter>
+
+        </Style>
+
+
+    </Window.Resources>
+
+    <Grid>
+
+        <Grid >
+            <Grid   x:Name="nav_pnl"
+                    
+                    Width="65"
+                    Background="{DynamicResource LightColor}"
+                    HorizontalAlignment="Left"
+                    Panel.ZIndex="1"
+                    >
+
+                <StackPanel x:Name="st_pnl">
+
+                    <!--// Grid for the Menu Toggle Button //-->
+
+                    <Grid Height="90" Background="{DynamicResource DarkColor}">
+
+                        <!--// Menu title text //-->
+
+                        <TextBlock  Grid.Row="1"
+                                    Grid.Column="0"
+                                    Margin="73,-20,0,0"
+                                    Text="{DynamicResource Menu}"
+                                    Foreground="White"
+                                    FontSize="22"
+                                    Background="Transparent"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource font_style}">
+                            
+                            <!--// Shadow Effect //-->
+
+                            <TextBlock.Effect>
+
+                                <DropShadowEffect  BlurRadius="10"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="White"/>
+
+                            </TextBlock.Effect>
+
+                        </TextBlock>
+
+                        <!--// Toggle Button //-->
+
+                        <ToggleButton x:Name="Tg_Btn"
+                                      Grid.Column="0"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left"
+                                      Margin="18,-20,0,0"
+                                      Height="30"
+                                      Width="30"
+                                      BorderThickness="0"
+                                      Style="{StaticResource tb_style}" >
+
+                            <!--// Toggle button default background image 
+                            Unchecked="Tg_Btn_Unchecked" Checked="Tg_Btn_Checked"
+                            //-->
+
+                            <ToggleButton.Background>
+
+                                <ImageBrush ImageSource="D:\2SEM\OOP\Labs\Lab6-7_WPF\Lab6-7_WPF\Assest\tgBtn_default.png"
+                                            Stretch="None"/>
+
+                            </ToggleButton.Background>
+
+                            <!--// Toggle Button - Checked, Unchecked events //-->
+
+                            <ToggleButton.Triggers>
+
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+
+                                    <BeginStoryboard>
+
+                                        <Storyboard x:Name="HideStackPanel">
+
+                                            <DoubleAnimation    
+                                                
+                                                Storyboard.TargetName="nav_pnl"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="230" To="65"
+                                                Duration="0:0:0.2"/>
+
+                                        </Storyboard>
+
+                                    </BeginStoryboard>
+
+                                </EventTrigger>
+
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+
+                                    <BeginStoryboard>
+
+                                        <Storyboard x:Name="ShowStackPanel">
+
+                                            <DoubleAnimation
+                                                
+                                                Storyboard.TargetName="nav_pnl"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="65" To="230"
+                                                Duration="0:0:0.3"/>
+
+                                        </Storyboard>
+
+                                    </BeginStoryboard>
+
+                                </EventTrigger>
+
+                            </ToggleButton.Triggers>
+
+
+                        </ToggleButton>
+
+                    </Grid>
+
+                    <ListView  x:Name="LV"
+                               Background="{DynamicResource LightColor}"
+                               BorderBrush="{x:Null}"
+                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                        <!--// Maps //-->
+
+
+                        <!--// Listview items style template //-->
+
+                        <ListView.ItemContainerStyle>
+
+                            <Style TargetType="{x:Type ListViewItem}">
+
+                                <Setter Property="Template">
+
+                                    <Setter.Value>
+
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+
+                                            <Border x:Name="Bd"
+                                                    Height="50"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    Background="{TemplateBinding Background}"
+                                                    Padding="{TemplateBinding Padding}"
+                                                    SnapsToDevicePixels="True">
+
+                                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                                            </Border>
+
+                                            <ControlTemplate.Triggers>
+
+                                                <MultiTrigger>
+
+                                                    <MultiTrigger.Conditions>
+
+                                                        <Condition Property="IsMouseOver" Value="True"/>
+
+                                                    </MultiTrigger.Conditions>
+
+                                                    <Setter Property="Background"
+                                                            TargetName="Bd"
+                                                            Value="#FF313030"/>
+
+                                                    <Setter Property="BorderBrush"
+                                                            TargetName="Bd"
+                                                            Value="#FF313030"/>
+
+                                                </MultiTrigger>
+
+                                            </ControlTemplate.Triggers>
+
+                                        </ControlTemplate>
+
+                                    </Setter.Value>
+
+                                </Setter>
+
+                            </Style>
+
+                        </ListView.ItemContainerStyle>
+
+                        <!--// Home //-->
+
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter">
+
+                            <!--// Tooltip //-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="tt_home"
+                                         Content="{DynamicResource Home}"
+                                         Style="{StaticResource tt_style}"/>
+
+                            </ListViewItem.ToolTip>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230" >
+
+                                <Button BorderBrush="{x:Null}" 
+                                        Foreground="{x:Null}" 
+                                        Width="40" Height="40" Margin="10,0,0,0"
+                                        Command="{Binding OpenHomeGrid}"
+                                        CommandParameter="{Binding ElementName=MoneyFyWnd}">
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="  D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\baseline_home_white_24dp.png"/>
+                                    </Button.Background>
+
+                                </Button>
+
+                                <TextBlock Text="{DynamicResource Home}"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}"/>
+
+                            </StackPanel>
+
+                        </ListViewItem>
+
+                        <!--// Catalog //-->
+
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter" 
+                                      
+                                      >
+
+                            <!--// Tooltip //-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="tt_contacts"
+                                         Content="{DynamicResource Operations}"
+                                         Style="{StaticResource tt_style}"/>
+
+                            </ListViewItem.ToolTip>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230" >
+
+                                <Button BorderBrush="{x:Null}" 
+                                        Foreground="{x:Null}" 
+                                        Width="40" Height="40" Margin="10,0,0,0"
+                                        Command="{Binding OpenOperationsPage}"
+                                        CommandParameter="{Binding ElementName=MoneyFyWnd}">
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\baseline_list_white_24dp.png"/>
+                                    </Button.Background>
+
+                                </Button>
+
+                                <TextBlock Text="{DynamicResource Operations}"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}"/>
+
+                            </StackPanel>
+
+                        </ListViewItem>
+
+                        <!--// Basket //-->
+
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
+                                      >
+
+                            <!--// Tooltip //-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="tt_messages"
+                                         Content="{DynamicResource Assessment}"
+                                         Style="{StaticResource tt_style}"/>
+
+                            </ListViewItem.ToolTip>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+
+                                <Button BorderBrush="{x:Null}" 
+                                        Foreground="{x:Null}" 
+                                        Width="40" Height="40" Margin="10,0,0,0" Cursor="Hand"
+                                        Command="{Binding OpenAssessmentPage}"
+                                        CommandParameter="{Binding ElementName=MoneyFyWnd}">
+                                    >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\baseline_assessment_white_24dp.png"/>
+                                    </Button.Background>
+
+                                </Button>
+
+                                <TextBlock Text="{DynamicResource Assessment}"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}"/>
+
+                            </StackPanel>
+
+                        </ListViewItem>
+
+                        <!--// Services //-->
+
+                        <ListViewItem x:Name="AdminElem1" HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
+                                      Visibility="Collapsed"
+                                      >
+
+                            <!--// Tooltip //-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="tt_add"
+                                         Content="{DynamicResource Services}"
+                                         Style="{StaticResource tt_style}"/>
+
+                            </ListViewItem.ToolTip>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230" >
+
+                                <Button BorderBrush="{x:Null}" 
+                                        Foreground="{x:Null}" 
+                                        Width="40" Height="40" Margin="10,0,0,0" Cursor="Hand"
+                                        Command="{Binding OpenServicesSettingsPage}"
+                                        CommandParameter="{Binding ElementName=MoneyFyWnd}">
+                                    >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\baseline_work_white_24dp.png"/>
+                                    </Button.Background>
+                                </Button>
+
+                                <TextBlock Text="{DynamicResource Services}"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}"/>
+
+                            </StackPanel>
+
+                        </ListViewItem>
+
+                        <!--Settings -->
+                        <ListViewItem x:Name="AdminElem0" HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
+                                      Visibility="Visible"
+                                      >
+
+                            <!--// Tooltip //-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="tt_settings"
+                                         Content="{DynamicResource Settings}"
+                                         Style="{StaticResource tt_style}"/>
+
+                            </ListViewItem.ToolTip>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230" >
+
+                                <Button BorderBrush="{x:Null}" 
+                                        Foreground="{x:Null}" 
+                                        Width="40" Height="40" Margin="10,0,0,0" Cursor="Hand"
+                                        Command="{Binding OpenUserSettingsPage}"
+                                        CommandParameter="{Binding ElementName=MoneyFyWnd}">
+                                    >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\baseline_settings_white_24dp.png"/>
+                                    </Button.Background>
+                                </Button>
+
+                                <TextBlock Text="{DynamicResource Settings}"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}"/>
+
+                            </StackPanel>
+
+                        </ListViewItem>
+
+
+
+                        <!--// Sign out //-->
+
+                        <ListViewItem x:Name="Sign" HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
+                                      Visibility="Visible"
+                                      >
+
+                            <!--// Tooltip //-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="tt_signout"
+                                         Content="{DynamicResource SignOut}"
+                                         Style="{StaticResource tt_style}"/>
+
+                            </ListViewItem.ToolTip>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230" >
+
+                                <Button BorderBrush="{x:Null}" 
+                                        Foreground="{x:Null}" 
+                                        Width="40" Height="40" Margin="10,0,0,0" Cursor="Hand"
+                                        Command="{Binding LogOut}"
+                                        CommandParameter="{Binding ElementName=MoneyFyWnd}"
+                                        >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\baseline_logout_white_24dp.png"/>
+                                    </Button.Background>
+
+                                </Button>
+
+                                <TextBlock Text="{DynamicResource SignOut}"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}"/>
+
+                            </StackPanel>
+
+                        </ListViewItem>
+
+
+
+
+
+
+
+                    </ListView>
+
+                </StackPanel>
+
+
+            </Grid>
+            <ScrollViewer Visibility="Visible">
+                <StackPanel>
+                    <Grid x:Name="MainGrid"  Margin="65,-10,0,10" Visibility="Visible" Height="784.07" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="250"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Margin="10"   Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Border CornerRadius="10" BorderThickness="4" BorderBrush="Black">
+                                    <TabControl TabStripPlacement="Top"   >
+                                        <TabItem  >
+                                            <TabItem.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <!--Добавить картинку -->
+                                                    <Image Source="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\+.jpg" Width="16" ></Image>
+                                                    <TextBlock Text="{DynamicResource Income}" FontWeight="Bold" FontSize="16"></TextBlock>
+                                                </StackPanel>
+
+                                            </TabItem.Header>
+
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="127*"/>
+                                                    <ColumnDefinition Width="519*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"></RowDefinition>
+                                                </Grid.RowDefinitions>
+
+
+                                                <mtrchart:PieChart x:Name="PiechartIncome" ChartSubTitle="" ChartTitle="{DynamicResource Income}" Grid.ColumnSpan="2" >
+                                                    <mtrchart:PieChart.Series>
+                                                        <mtrchart:ChartSeries x:Name="PieChartIncome"  DisplayMember="Name" 
+                                                ValueMember="Sum" ItemsSource="{Binding Path=Incomes}" SeriesTitle="1"  />
+                                                    </mtrchart:PieChart.Series>
+                                                </mtrchart:PieChart>
+
+
+
+                                            </Grid>
+
+                                        </TabItem>
+                                        <TabItem>
+                                            <TabItem.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <!--Добавить картинку -->
+                                                    <Image Source="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\-.jpg" Width="20" ></Image>
+                                                    <TextBlock Text="{DynamicResource Waste}" FontWeight="Bold" FontSize="17"></TextBlock>
+                                                </StackPanel>
+                                            </TabItem.Header>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"></RowDefinition>
+                                                </Grid.RowDefinitions>
+
+                                                <mtrchart:PieChart x:Name="PiechartWaste" ChartSubTitle="" ChartTitle="{DynamicResource Waste}" >
+                                                    <mtrchart:PieChart.Series>
+                                                        <mtrchart:ChartSeries x:Name="PieChartWaste"  DisplayMember="Name" 
+                                                ValueMember="Sum" ItemsSource="{Binding Path=Wastes}" SeriesTitle="1"  />
+                                                    </mtrchart:PieChart.Series>
+                                                </mtrchart:PieChart>
+                                            </Grid>
+                                        </TabItem>
+
+
+                                    </TabControl>
+                                </Border>
+                            </Grid>
+
+
+                            <Grid Grid.Row="1"  Margin="10"  >
+
+                                <Border BorderBrush="Black" BorderThickness="4" CornerRadius="10" >
+                                    <TabControl Background="Azure">
+                                        <TabItem Height="60" >
+                                            <TabItem.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Image Source="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\operations.png" Width="30"></Image>
+                                                    <TextBlock Text="{DynamicResource LastOperations}" Foreground="Black" FontSize="20" Margin="10,0,0,0" TextTrimming="CharacterEllipsis"></TextBlock>
+                                                </StackPanel>
+                                            </TabItem.Header>
+                                            <TabItem.ContextMenu>
+                                                <ContextMenu Background="#FF313030" Foreground="White">
+                                                    <MenuItem Header="Редактировать" Command="{Binding OpenEditOperationPage}" CommandTarget="{Binding ElementName=MoneyFyWnd}"></MenuItem>
+                                                    <MenuItem Header="Удалить" Command="{Binding DeleteOperation}" />
+                                                </ContextMenu>
+                                            </TabItem.ContextMenu>
+                                            <Grid Background="{DynamicResource Secondary}">
+                                                <ScrollViewer x:Name="OperationListBox" Visibility="Visible">
+                                                    <ListBox x:Name="ViewListBoxOperation" SelectionMode="Single" Foreground="{DynamicResource Text}" ItemsSource="{Binding AllOperations}" ScrollViewer.HorizontalScrollBarVisibility="Visible" SelectedItem="{Binding SelectedOperation}">
+                                                        <ListBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Grid x:Name="listElementOperation">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="40"></ColumnDefinition>
+                                                                        <ColumnDefinition Width="190"></ColumnDefinition>
+                                                                        <ColumnDefinition Width="190"></ColumnDefinition>
+                                                                        <ColumnDefinition Width="80"></ColumnDefinition>
+                                                                    </Grid.ColumnDefinitions>
+
+                                                                    <Image Grid.Column="0" Width="40" Height="40" HorizontalAlignment="Left" Source="{Binding Path=OperationAccount.IconPath}"></Image>
+                                                                    <StackPanel Grid.Column="1" Margin="20,0,0,0">
+                                                                        <TextBlock FontSize="15" HorizontalAlignment="Center"  Text="{Binding Path=Name}"></TextBlock>
+                                                                        <TextBlock FontSize="10" HorizontalAlignment="Center"  Text="{Binding Path=OperationCategory.Name}"></TextBlock>
+                                                                    </StackPanel>
+                                                                    <TextBlock Grid.Column="2"  FontSize="15" FontStyle="Italic" HorizontalAlignment="Center" Text="{Binding Path=date}"></TextBlock>
+                                                                    <TextBlock Grid.Column="3"  FontSize="20" FontStyle="Italic" HorizontalAlignment="Right" Text="{Binding Path=Sum}"></TextBlock>
+
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </ListBox.ItemTemplate>
+                                                    </ListBox>
+                                                </ScrollViewer>
+                                            </Grid>
+
+
+                                        </TabItem>
+                                    </TabControl>
+                                </Border>
+
+                            </Grid>
+                        </Grid>
+
+
+
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="350"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Border CornerRadius="10" Grid.Row="0"  BorderThickness="4" Margin="10" BorderBrush="Black">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="80"></RowDefinition>
+                                        <RowDefinition Height="*" ></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Grid.Row="0" Background="{DynamicResource LightColor}" Margin="3" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                            <TextBlock Text="{DynamicResource YourAccounts}" VerticalAlignment="Center" Margin="15" Foreground="{DynamicResource Text}" FontWeight="Bold" FontSize="30"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                                            <Button HorizontalAlignment="Right" Content="{DynamicResource CreateAccount}" 
+                                        Width="155" FontSize="20" 
+                                        Style="{StaticResource  MaterialDesignOutlinedDarkButton}" 
+                                        BorderBrush="{x:Null}" Foreground="Black" 
+                                        Height="55"
+                                        Command="{Binding OpenAddAccountPage}" 
+                                        CommandParameter="{Binding ElementName=MoneyFyWnd}" Cursor="Hand"></Button>
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <Grid  Grid.Row="1" Background="{DynamicResource Secondary}" >
+                                        <StackPanel>
+
+                                            <ScrollViewer x:Name="AccountsListBox" Visibility="Visible" HorizontalScrollBarVisibility="Visible" Height="326">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="30"></RowDefinition>
+                                                        <RowDefinition></RowDefinition>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="70"></ColumnDefinition>
+                                                            <ColumnDefinition Width="230"></ColumnDefinition>
+                                                            <ColumnDefinition Width="80"></ColumnDefinition>
+                                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Text="Иконка" FontSize="16" Grid.Column="0" Margin="10,0,0,0"  ></TextBlock>
+                                                        <TextBlock Text="Наименование счёта" FontSize="15" Grid.Column="1" Margin="40,0,0,0"   />
+                                                        <TextBlock Text="Баланс" FontSize="15" Grid.Column="3" />
+                                                        <TextBlock Text="Валюта" FontSize="15" Grid.Column="4"/>
+
+                                                    </Grid>
+                                                    <ListBox x:Name="ViewListBoxAccount" Grid.Row="1" SelectionMode="Single" Foreground="{DynamicResource Text}" ItemsSource="{Binding AllAccountsOfCurrentUser}" SelectedItem="{Binding SelectedAccount}" >
+                                                        <ListBox.ContextMenu>
+                                                            <ContextMenu Background="#FF313030" Foreground="White">
+                                                                <MenuItem Header="Редактировать" Command="{Binding OpenEditAccountPage}"/>
+                                                                <MenuItem Header="Удалить" Command="{Binding DeleteAccount}" CommandParameter="{Binding ElementName=MoneyFyWnd}"/>
+                                                            </ContextMenu>
+                                                        </ListBox.ContextMenu>
+
+                                                        <ListBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Grid x:Name="listElement">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="70"></ColumnDefinition>
+                                                                        <ColumnDefinition Width="230"></ColumnDefinition>
+                                                                        <ColumnDefinition Width="150"></ColumnDefinition>
+                                                                        <ColumnDefinition Width="100"></ColumnDefinition>
+                                                                    </Grid.ColumnDefinitions>
+
+                                                                    <Image Grid.Column="0" Width="50" Height="50" HorizontalAlignment="Left" Source="{Binding Path=IconPath}"></Image>
+                                                                    <TextBlock Grid.Column="1" FontSize="20" HorizontalAlignment="Center"  Text="{Binding Path=Name}"></TextBlock>
+                                                                    <TextBlock Grid.Column="2"  FontSize="20" FontStyle="Italic" HorizontalAlignment="Right" Text="{Binding Path=Balance}"></TextBlock>
+                                                                    <TextBlock Grid.Column="3"  FontSize="20" FontStyle="Italic" HorizontalAlignment="Right" Text="{Binding Path=CurrencyName}"></TextBlock>
+
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </ListBox.ItemTemplate>
+                                                    </ListBox>
+
+                                                </Grid>
+                                            </ScrollViewer>
+
+                                        </StackPanel>
+                                        <Grid Visibility="Collapsed" x:Name="AccountAddGrid">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                                <RowDefinition Height="45"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Frame Grid.Row="0"  NavigationUIVisibility="Hidden" x:Name="AccountAddFrame" ></Frame>
+                                            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                                <Button Height="45" Content="Добавить" Margin="0,0,10,0"
+                                            Command="{Binding AddAccount}"
+                                            CommandParameter="{Binding ElementName=MoneyFyWnd}">
+
+                                                </Button>
+                                                <Button Height="45" Content="Отмена"
+                                            Command="{Binding CloseAddAccountPage}"
+                                            CommandParameter="{Binding ElementName=MoneyFyWnd}">
+
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+
+
+                                </Grid>
+                            </Border>
+
+
+
+
+                            <Grid Margin="10" Grid.Row="1" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Border CornerRadius="10" BorderThickness="4" BorderBrush="Black">
+                                    <TabControl TabStripPlacement="Top"  SelectedItem="{Binding SelectedTabItem}"   >
+                                        <TabItem x:Name="Income"  >
+                                            <TabItem.Header>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <!--Добавить картинку -->
+                                                    <Image Source="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\+.jpg" Width="16" ></Image>
+                                                    <TextBlock Text="{DynamicResource Income}" FontWeight="Bold" FontSize="16"></TextBlock>
+                                                </StackPanel>
+
+                                            </TabItem.Header>
+
+                                            <Grid >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="31*"/>
+                                                    <ColumnDefinition Width="10*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"></RowDefinition>
+                                                    <RowDefinition Height="50"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <StackPanel Grid.Row="0" Grid.ColumnSpan="2"  >
+                                                    <StackPanel  Margin="20,10,20,0">
+                                                        <TextBox Name="NameBlockIncome"  Height="45"
+                                                     materialDesign:HintAssist.Hint="{DynamicResource IncName}"
+                                                     FontSize="16" FontWeight="Bold" 
+                                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+
+
+                                                            <Binding Path="OperationName">
+                                                                <Binding.ValidationRules>
+                                                                    <vld:RegexValidationRule
+                                                                        RegexText="(([A-Z][a-z]*)|([А-Я][а-я]*))$"
+                                                                        ErrorMessage="Неккоректно введены данные"
+                                                                        RegexOptions="IgnoreCase">
+                                                                    </vld:RegexValidationRule>
+                                                                </Binding.ValidationRules>
+                                                            </Binding>
+
+                                                        </TextBox>
+                                                    </StackPanel>
+                                                    <Grid   Margin="20,10,20,0">
+                                                        <StackPanel  HorizontalAlignment="Left" Margin="0,10,0,0">
+                                                            <ComboBox x:Name="AccountBlockIncome"  Height="50" 
+                                                                    ItemsSource="{Binding AllAccountsOfCurrentUser}"
+                                                                    SelectedItem="{Binding OperationAccount}"
+                                                                    FontSize="18" FontWeight="Bold"
+                                                                    materialDesign:HintAssist.Hint="Счёт зачисления"
+                                                                    Style="{StaticResource MaterialDesignComboBox}">
+                                                                <ComboBox.ItemTemplate>
+                                                                    <ItemContainerTemplate>
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <Image Source="{Binding Path=IconPath}" Height="20" Width="20"></Image>
+                                                                            <TextBlock Text="{Binding Path=Name}" FontSize="14" Margin="5"></TextBlock>
+                                                                        </StackPanel>                                                                        
+                                                                    </ItemContainerTemplate>
+                                                                </ComboBox.ItemTemplate>
+                                                            </ComboBox>
+                                                           
+                                                        </StackPanel>
+                                                        <StackPanel HorizontalAlignment="Right" Margin="150,10,0,0" Width="160">
+                                                            
+                                                            <ComboBox x:Name="CategoryBlockIncome"  Height="50" 
+                                                                    ItemsSource="{Binding AllIncomesCategories}"
+                                                                    SelectedItem="{Binding OperationCategory}"
+                                                                    FontSize="18" FontWeight="Bold"
+                                                                    materialDesign:HintAssist.Hint="Категория"
+                                                                    Style="{StaticResource MaterialDesignComboBox}">
+                                                                <ComboBox.ItemTemplate>
+                                                                    <ItemContainerTemplate>
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <Image Source="{Binding Path=IconPath}" Height="20" Width="20"></Image>
+                                                                            <TextBlock Text="{Binding Path=Name}" FontSize="14" Margin="5"></TextBlock>
+                                                                        </StackPanel>
+                                                                    </ItemContainerTemplate>
+                                                                </ComboBox.ItemTemplate>
+                                                            </ComboBox>
+                                                        </StackPanel>
+                                                    </Grid>
+
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                        <StackPanel HorizontalAlignment="Left" Margin="20,10,0,0">
+                                                            <TextBox Name="SumBlockIncome"  Height="45" Width="80" 
+                                                         materialDesign:HintAssist.Hint="{DynamicResource Amount}" 
+                                                         FontSize="14" FontWeight="Bold"
+                                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+
+                                                                <Binding Path="OperationSum" UpdateSourceTrigger="PropertyChanged">
+                                                                    <Binding.ValidationRules>
+                                                                        <vld:RegexValidationRule
+                                                                            RegexText="[0-9]$"
+                                                                             ErrorMessage="Неккоректно введены данные"
+                                                                             RegexOptions="IgnoreCase">
+                                                                        </vld:RegexValidationRule>
+                                                                    </Binding.ValidationRules>
+                                                                </Binding>
+
+                                                            </TextBox>
+                                                        </StackPanel>
+                                                       
+                                                    </StackPanel>
+                                                </StackPanel>
+                                                <Button Grid.Row="1"
+                                                        HorizontalAlignment="Left"
+                                                        Width="150" Height="45" 
+                                                        Content="{DynamicResource Create}" Margin="0,3,0,2"
+                                                        FontSize="20"
+                                                        Command="{Binding AddOperation}"
+                                                        CommandParameter="{Binding ElementName=MoneyFyWnd}" Grid.Column="1">
+                                                    <Button.Style>
+
+                                                        <Style TargetType="Button">
+
+
+
+                                                            <Setter Property="Background" Value="{DynamicResource AverageColor}"></Setter>
+                                                            <Setter Property="Foreground" Value="White"></Setter>
+
+                                                            <Style.Triggers>
+
+                                                                <MultiDataTrigger>
+
+                                                                    <MultiDataTrigger.Conditions>
+                                                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=NameBlockIncome}" Value="False"/>
+                                                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=SumBlockIncome}" Value="False"/>
+                                                                    </MultiDataTrigger.Conditions>
+
+                                                                    <Setter Property="IsEnabled" Value="True"/>
+
+                                                                </MultiDataTrigger>
+
+                                                                <MultiDataTrigger>
+                                                                    <MultiDataTrigger.Conditions>
+                                                                        <Condition Binding="{Binding ElementName=NameBlockIncome, Path=Text.Length}" Value="0" />
+                                                                    </MultiDataTrigger.Conditions>
+                                                                    <Setter Property="IsEnabled" Value="False" />
+                                                                </MultiDataTrigger>
+                                                                <MultiDataTrigger>
+                                                                    <MultiDataTrigger.Conditions>
+                                                                        <Condition Binding="{Binding ElementName=SumBlockIncome, Path=Text.Length}" Value="0" />
+                                                                    </MultiDataTrigger.Conditions>
+                                                                    <Setter Property="IsEnabled" Value="False" />
+                                                                </MultiDataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
+                                                </Button>
+                                            </Grid>
+
+                                        </TabItem>
+                                        <TabItem x:Name="Waste">
+                                            <TabItem.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <!--Добавить картинку -->
+                                                    <Image Source="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\-.jpg" Width="20" ></Image>
+                                                    <TextBlock Text="{DynamicResource Waste}" FontWeight="Bold" FontSize="17"></TextBlock>
+                                                </StackPanel>
+                                            </TabItem.Header>
+                                            <Grid Background="{DynamicResource Secondary}">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"></RowDefinition>
+                                                    <RowDefinition Height="50"></RowDefinition>
+                                                </Grid.RowDefinitions>
+
+
+                                                <StackPanel Grid.Row="0" >
+                                                    <StackPanel  Margin="20,10,20,0">
+
+                                                        <TextBox Name="NameBlockWaste"  Height="45"
+                                                     materialDesign:HintAssist.Hint="{DynamicResource WstName}"
+                                                     FontSize="16" FontWeight="Bold"
+                                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                                            <Binding Path="OperationName">
+                                                                <Binding.ValidationRules>
+                                                                    <vld:RegexValidationRule
+                                                                        RegexText="(([A-Z][a-z]*)|([А-Я][а-я]*))$"
+                                                                        ErrorMessage="Неккоректно введены данные"
+                                                                        RegexOptions="IgnoreCase">
+                                                                    </vld:RegexValidationRule>
+                                                                </Binding.ValidationRules>
+                                                            </Binding>
+                                                        </TextBox>
+                                                    </StackPanel>
+                                                    <Grid   Margin="20,10,20,0">
+                                                        <StackPanel  HorizontalAlignment="Left" Margin="10">
+
+                                                            <ComboBox  x:Name="AccountBlockWaste" Height="50" 
+                                                                    ItemsSource="{Binding AllAccountsOfCurrentUser}"
+                                                                    SelectedItem="{Binding OperationAccount}"
+                                                                    FontSize="18" FontWeight="Bold"
+                                                                    materialDesign:HintAssist.Hint="Счёт зачисления"
+                                                                    Style="{StaticResource MaterialDesignComboBox}">
+                                                                <ComboBox.ItemTemplate>
+                                                                    <ItemContainerTemplate>
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <Image Source="{Binding Path=IconPath}" Height="20" Width="20"></Image>
+                                                                            <TextBlock Text="{Binding Path=Name}" FontSize="14" Margin="5"></TextBlock>
+                                                                        </StackPanel>
+                                                                    </ItemContainerTemplate>
+                                                                </ComboBox.ItemTemplate>
+                                                            </ComboBox>
+                                                        </StackPanel>
+                                                        <StackPanel HorizontalAlignment="Right" Margin="10">
+                                                            <ComboBox x:Name="CategoryBlockWaste"  Height="50" 
+                                                                    ItemsSource="{Binding AllWastesCategories}"
+                                                                    SelectedItem="{Binding OperationCategory}"
+                                                                    FontSize="18" FontWeight="Bold"
+                                                                    materialDesign:HintAssist.Hint="Категория"
+                                                                    Style="{StaticResource MaterialDesignComboBox}">
+                                                                <ComboBox.ItemTemplate>
+                                                                    <ItemContainerTemplate>
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <Image Source="{Binding Path=IconPath}" Height="20" Width="20"></Image>
+                                                                            <TextBlock Text="{Binding Path=Name}" FontSize="14" Margin="5"></TextBlock>
+                                                                        </StackPanel>
+                                                                    </ItemContainerTemplate>
+                                                                </ComboBox.ItemTemplate>
+                                                            </ComboBox>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
+                                                        <StackPanel HorizontalAlignment="Left" Margin="20,0,20,0">
+                                                            <TextBox Name="SumBlockWaste"  Height="45" Width="80" 
+                                                         materialDesign:HintAssist.Hint="{DynamicResource Amount}" 
+                                                         FontSize="16" FontWeight="Bold"
+                                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                                                <Binding Path="OperationSum">
+                                                                    <Binding.ValidationRules>
+                                                                        <vld:RegexValidationRule
+                                                                        RegexText="[0-9]$"
+                                                                        ErrorMessage="Неккоректно введены данные"
+                                                                        RegexOptions="IgnoreCase">
+                                                                        </vld:RegexValidationRule>
+                                                                    </Binding.ValidationRules>
+                                                                </Binding>
+                                                            </TextBox>
+                                                        </StackPanel>
+                                                        
+                                                    </StackPanel>
+                                                </StackPanel>
+
+
+
+                                                <Button Grid.Row="1"
+                                            HorizontalAlignment="Right"
+                                            Width="150" Content="{DynamicResource Create}"
+                                            FontSize="20"
+                                            Height="45" Margin="0,0,10,0"
+                                            Command="{Binding AddOperation}"
+                                            CommandParameter="{Binding ElementName=MoneyFyWnd}">
+                                                    <Button.Resources>
+                                                        <Style TargetType="Border">
+                                                            <Setter Property="CornerRadius" Value="3"/>
+                                                        </Style>
+                                                    </Button.Resources>
+                                                    <Button.Style>
+
+                                                        <Style TargetType="Button">
+
+
+
+                                                            <Setter Property="Background" Value="{DynamicResource AverageColor}"></Setter>
+                                                            <Setter Property="Foreground" Value="White"></Setter>
+
+                                                            <Style.Triggers>
+
+                                                                <MultiDataTrigger>
+
+                                                                    <MultiDataTrigger.Conditions>
+                                                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=NameBlockWaste}" Value="False"/>
+                                                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=SumBlockWaste}" Value="False"/>
+                                                                    </MultiDataTrigger.Conditions>
+
+                                                                    <Setter Property="IsEnabled" Value="True"/>
+
+                                                                </MultiDataTrigger>
+
+                                                                <MultiDataTrigger>
+                                                                    <MultiDataTrigger.Conditions>
+                                                                        <Condition Binding="{Binding ElementName=NameBlockWaste, Path=Text.Length}" Value="0" />
+                                                                    </MultiDataTrigger.Conditions>
+                                                                    <Setter Property="IsEnabled" Value="False" />
+                                                                </MultiDataTrigger>
+                                                                <MultiDataTrigger>
+                                                                    <MultiDataTrigger.Conditions>
+                                                                        <Condition Binding="{Binding ElementName=SumBlockWaste, Path=Text.Length}" Value="0" />
+                                                                    </MultiDataTrigger.Conditions>
+                                                                    <Setter Property="IsEnabled" Value="False" />
+                                                                </MultiDataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
+                                                </Button>
+                                            </Grid>
+                                        </TabItem>
+
+
+                                    </TabControl>
+                                </Border>
+                            </Grid>
+                        </Grid>
+
+
+
+
+
+
+
+                    </Grid>
+                    <Grid Margin="65,-10,0,10" Visibility="Visible" Height="784.07">
+
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+
+            <Grid Margin="65,0,0,0" x:Name="StartPage" Visibility="Visible" Opacity="1" Background="#FFF8F8F8" >
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="450"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label FontSize="66" Content="MM-MoneyFY" VerticalAlignment="Center" FontWeight="Bold" HorizontalContentAlignment="Center" Foreground="{DynamicResource AverageColor}"></Label>
+                <Image Source="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\logo.png" Grid.Row="1"></Image>
+                <Label FontSize="66" Content="{DynamicResource Welcome}" VerticalAlignment="Top" FontWeight="Bold" HorizontalContentAlignment="Center" Grid.Row="2" Foreground="{DynamicResource AverageColor}"></Label>
+                <Button Grid.Row="3" HorizontalAlignment="Center" Content="{DynamicResource Continue}" FontSize="30" Height="60" Command="{Binding Start}" CommandParameter="{Binding ElementName=MoneyFyWnd}"/>
+            </Grid>
+
+            <Grid x:Name="GridForEditPages" Visibility="Collapsed">
+                <Grid x:Name="BackGrid" Margin="400"  Background="Gray" Opacity="0.5">
+
+                </Grid>
+
+                <Grid x:Name="GridWhithEditPages" HorizontalAlignment="Center" Opacity="1" Panel.ZIndex="999" VerticalAlignment="Center"  Width="0" Height="300">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Border CornerRadius="10" BorderThickness="5" BorderBrush="White" Background="White">
+                        <Frame x:Name="EditPagesFrame" Grid.Row="0" NavigationUIVisibility="Hidden"></Frame>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" >
+                        <Button Width="150" Height="45" 
+                                Content="Изменить" Margin="0,0,10,0"
+                                FontSize="20"
+                                Command="{Binding EditOperation}"
+                                CommandParameter="{Binding ElementName=MoneyFyWnd}"
+                                ></Button>
+                        <Button Width="150" Height="45" 
+                                Content="Отмена" Margin="0,0,10,0"
+                                FontSize="20"
+                                Command="{Binding CloseEditGrid}"
+                                CommandParameter="{Binding ElementName=MoneyFyWnd}"
+                                ></Button>
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+
+            <Frame NavigationUIVisibility="Hidden" x:Name="frameForPages" Height="Auto" Margin="65,0,0,0" Visibility="Collapsed"></Frame>
+        </Grid>
+
+    </Grid>
+</Window>

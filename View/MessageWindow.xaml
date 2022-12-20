@@ -1,0 +1,28 @@
+﻿<Window x:Class="MM_MoneyFy.View.MessageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MM_MoneyFy.View"
+        mc:Ignorable="d"
+        x:Name="MessageViewWnd"
+         Title="MessageView" Height="150" Width="300" ResizeMode="NoResize" WindowStyle="None" Background="Transparent" AllowsTransparency="True" >
+    <Grid Background="Transparent">
+        <Border BorderBrush="{DynamicResource MaterialDesignCheckBoxDisabled}" BorderThickness="10" CornerRadius="15">
+            <Grid  Background="{DynamicResource MaterialDesignCheckBoxDisabled}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="35"/>
+                </Grid.RowDefinitions>
+                <Label Content="" HorizontalAlignment="Center" FontSize="10"></Label>
+                <TextBlock x:Name="MessageText" Grid.Row="1"
+                   Margin="10"
+                   TextWrapping="Wrap"/>
+                <Button Grid.Row="2" Content="OK" Command="{Binding CloseWnd, Mode=OneWay}"  Margin="20,0,20,0"
+                CommandParameter="{Binding ElementName=MessageViewWnd}" Style="{StaticResource MaterialDesignOutlinedButton}"/>
+            </Grid>
+        </Border>
+       
+    </Grid>
+</Window>

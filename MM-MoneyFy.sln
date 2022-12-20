@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MM-MoneyFy", "MM-MoneyFy.csproj", "{BBF44136-37CF-4AD1-A308-1713697DFECA}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "..\Setup\Setup.vdproj", "{4A439F8A-74A1-4F12-8C74-AE82A35CACBE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BBF44136-37CF-4AD1-A308-1713697DFECA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBF44136-37CF-4AD1-A308-1713697DFECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBF44136-37CF-4AD1-A308-1713697DFECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBF44136-37CF-4AD1-A308-1713697DFECA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A439F8A-74A1-4F12-8C74-AE82A35CACBE}.Debug|Any CPU.ActiveCfg = Debug
+		{4A439F8A-74A1-4F12-8C74-AE82A35CACBE}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4A18C1D-596F-495F-ADBE-31D9206FECE9}
+	EndGlobalSection
+EndGlobal

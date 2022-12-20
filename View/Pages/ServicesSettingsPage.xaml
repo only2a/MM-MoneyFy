@@ -1,0 +1,140 @@
+﻿<Page x:Class="MM_MoneyFy.View.Pages.ServicesSettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MM_MoneyFy.View.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1364"
+      Title="ServicesSettingsPage">
+
+    <Grid x:Name="ServicesGrid" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Width="{Binding ServicesGrid, XPath=Width}" Margin="10" >
+            <Label Content="Услуги аналитиков" FontSize="44" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+            <Separator Background="{DynamicResource AverageColor}" Height="10" BorderThickness="100" BorderBrush="{DynamicResource AverageColor}" />
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Border BorderBrush="{DynamicResource AverageColor}" BorderThickness="3" Margin="10" CornerRadius="10" Grid.Column="0">
+                
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"></RowDefinition>
+                        <RowDefinition Height="250"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="60"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel VerticalAlignment="Center">
+                        <Label Content="Консультант" FontSize="32" FontWeight="Bold"  HorizontalAlignment="Center"></Label>
+                        <Separator VerticalAlignment="Bottom" Margin="10,10,10,0" BorderBrush="{DynamicResource AverageColor}" Background="{DynamicResource AverageColor}" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" >
+                        <TextBlock Margin="20" TextWrapping="Wrap" Text="Обучает ведению учета в ПланФакте"  HorizontalAlignment="Center"  FontSize="28" FontWeight="DemiBold"/>
+                        <Border CornerRadius="10" BorderBrush="{DynamicResource AverageColor}" BorderThickness="2" Height="50" Margin="20" VerticalAlignment="Top">
+                            <Grid>
+                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,0,0,0" Text="1 месяц" VerticalAlignment="Center" FontSize="20" FontWeight="DemiBold"  />
+                                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="60$/мес." VerticalAlignment="Center"  Margin="0,0,15,0" FontSize="20" FontWeight="DemiBold"  />
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                    <ListBox x:Name="UlStackPanel" Grid.Row="2" >
+                        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                            <Image Height="30" Width="30" Source="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\different\baseline_expand_circle_down_black_18dp.png"></Image>
+                            <TextBlock TextWrapping="Wrap" Text="Учит вести учет в вашем бизнесе" FontSize="24"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                            <Image Height="30" Width="30" Source="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\different\baseline_expand_circle_down_black_18dp.png"></Image>
+                            <TextBlock TextWrapping="Wrap" Text="Контролирует внесение данных" FontSize="24"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                            <Image Height="30" Width="30" Source="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\different\baseline_expand_circle_down_black_18dp.png"></Image>
+                            <TextBlock TextWrapping="Wrap" Text="Проверяет правильность ведения учета" FontSize="24" Width="380"/>
+                        </StackPanel>
+                    </ListBox>
+                    
+                    <StackPanel Grid.Row="4" VerticalAlignment="Center" >
+                        <Button Width="250" Height="50" Content="Оставить заявку" FontSize="20"
+                                Foreground="{DynamicResource AverageColor}" BorderBrush="{DynamicResource AverageColor}"
+                                Style="{StaticResource MaterialDesignOutlinedButton}">
+                            
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                
+            </Border>
+            <Border BorderBrush="{DynamicResource AverageColor}" BorderThickness="3" Margin="10" CornerRadius="10" Grid.Column="1">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"></RowDefinition>
+                        <RowDefinition Height="250"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="60"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel VerticalAlignment="Center">
+                        <Label Content="Помощник" FontSize="32" FontWeight="Bold"  HorizontalAlignment="Center"></Label>
+                        <Separator VerticalAlignment="Bottom" Margin="10,10,10,0" BorderBrush="{DynamicResource AverageColor}" Background="{DynamicResource AverageColor}" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" >
+                        <TextBlock Margin="0,10,0,0" TextWrapping="Wrap" Text="Ведет комплексный учет, планирует и анализирует показатели"  HorizontalAlignment="Center"  FontSize="28" FontWeight="DemiBold" Width="390"/>
+                        <Border CornerRadius="10" BorderBrush="{DynamicResource AverageColor}" BorderThickness="2" Height="50" Margin="20" VerticalAlignment="Top">
+                            <Grid>
+                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,0,0,0" Text="1 месяц" VerticalAlignment="Center" FontSize="20" FontWeight="DemiBold"  />
+                                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="60$/мес." VerticalAlignment="Center"  Margin="0,0,15,0" FontSize="20" FontWeight="DemiBold"  />
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                    <ListBox  Grid.Row="2" >
+                        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                            <Image Height="30" Width="30" Source="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\different\baseline_expand_circle_down_black_18dp.png"></Image>
+                            <TextBlock TextWrapping="Wrap" Text="Регулярно вносит данные" FontSize="24"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                            <Image Height="30" Width="30" Source="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\different\baseline_expand_circle_down_black_18dp.png"></Image>
+                            <TextBlock TextWrapping="Wrap" Text="Формирует корректные отчеты" FontSize="24"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                            <Image Height="30" Width="30" Source="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\different\baseline_expand_circle_down_black_18dp.png"></Image>
+                            <TextBlock TextWrapping="Wrap" Text="Помогает планировать финансы" FontSize="24" Width="380"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                            <Image Height="30" Width="30" Source="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\different\baseline_expand_circle_down_black_18dp.png"></Image>
+                            <TextBlock TextWrapping="Wrap" Text="Отчитывается о результатах работы" FontSize="24" Width="380"/>
+                        </StackPanel>
+                    </ListBox>
+                    
+                    <StackPanel Grid.Row="4" VerticalAlignment="Center" >
+                        <Button Width="250" Height="50" Content="Оставить заявку"  
+                                BorderBrush="{DynamicResource AverageColor}"
+                                Foreground="{DynamicResource AverageColor}"
+                                FontSize="20" Style="{StaticResource MaterialDesignOutlinedButton}">
+
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Border BorderBrush="{DynamicResource AverageColor}" BorderThickness="3" Margin="10" CornerRadius="10" Grid.Column="2">
+               
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel VerticalAlignment="Center">
+                        <Label Content="Ваши заказы" FontSize="32" FontWeight="Bold"  HorizontalAlignment="Center"></Label>
+                        <Separator VerticalAlignment="Bottom" Margin="10,10,10,0" BorderBrush="{DynamicResource AverageColor}" Background="{DynamicResource AverageColor}" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>

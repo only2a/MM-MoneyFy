@@ -1,0 +1,149 @@
+﻿<Page x:Class="MM_MoneyFy.View.Pages.OperationsPageView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:MM_MoneyFy.View.Pages"
+      xmlns:conv="clr-namespace:MM_MoneyFy.Converter"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1364"
+      Title="OperationsPageView">
+    <Page.Resources>
+        <conv:SumToColorConverter x:Key="SumToColorConverter"></conv:SumToColorConverter>
+        <Style x:Key="SumStyle" TargetType="{x:Type DataGridCell}">
+            <Setter Property="Foreground" Value="{Binding Sum, Converter={StaticResource SumToColorConverter}}" />
+        </Style>
+    </Page.Resources>
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid x:Name="Title" Grid.Row="0" Margin="20" >
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Image Source="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\baseline_list_black_24dp.png" Height="80" Width="80"></Image>
+                <Label Content="Мои операции" FontSize="44" Foreground="{DynamicResource AverageColor}" FontWeight="Bold"></Label>
+            </StackPanel>
+        </Grid>
+        <Border Background="White" BorderBrush="{DynamicResource AverageColor}" BorderThickness="4"  Margin="20" Grid.Row="1" CornerRadius="10">
+            <Grid x:Name="OperationsList">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid x:Name="SearchGrid" Margin="10">
+                    <StackPanel x:Name="SearchPanel" VerticalAlignment="Center">
+                        <TextBox Text="{Binding SearchByName, UpdateSourceTrigger=PropertyChanged}" materialDesign:ColorZoneAssist.Foreground="{DynamicResource AverageColor}"
+                                 FontSize="20" FontWeight="Bold"
+                                 materialDesign:HintAssist.Hint="Поиск по названию операции" 
+                                 Style="{StaticResource MaterialDesignFilledTextBox}">
+                            
+                        </TextBox>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <DataGrid x:Name="OperationsDataGrid" AutoGenerateColumns="False" 
+                              ItemsSource="{Binding AllOperations}" CanUserResizeColumns="False" 
+                              CanUserResizeRows="False" HorizontalScrollBarVisibility="Auto" 
+                              CanUserAddRows="False" CanUserReorderColumns="False" CanUserDeleteRows="False" 
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Счёт">
+                                <!--IsReadOnly="True"-->
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Width="25" Height="25" Source="{Binding Path=OperationAccount.IconPath}"
+                                           />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Binding="{Binding Path=OperationAccount.Name}" IsReadOnly="True" Header="Имя счёта"/>
+                            <DataGridTextColumn Binding="{Binding Path=Name}" Header="Наименование операции"/>
+                            <DataGridTextColumn Binding="{Binding Path=OperationCategory.Name}" Header="Категория" />
+                            <DataGridTextColumn Binding="{Binding Path=date}" Header="Дата" />
+                            <DataGridTextColumn Binding="{Binding Path=Sum}" Header="Сумма" CellStyle="{StaticResource SumStyle}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Grid>
+        </Border>
+        <Grid x:Name="FiltrationGrid" Grid.Row="1" Grid.Column="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border BorderBrush="{DynamicResource AverageColor}" BorderThickness="4"  Margin="20" CornerRadius="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" >
+                        <Image Margin="5,0,0,0" Source="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\baseline_fact_check_black_24dp.png"  Height="30" Width="30"></Image>
+                        <Label Content="Статистика" FontSize="20" FontWeight="Bold" Margin="0,5,0,0"></Label>
+                        
+                    </StackPanel>
+                    <Separator VerticalAlignment="Bottom" Margin="10,10,10,0" BorderBrush="{DynamicResource AverageColor}" Background="{DynamicResource AverageColor}" />
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Margin="5">
+                            <TextBlock Text="Операции:" FontSize="16" FontWeight="Bold" Height="30"></TextBlock>
+                            <TextBlock Text="Доход:" FontSize="16" FontWeight="Bold" Height="30"></TextBlock>
+                            <TextBlock Text="Расход:" FontSize="16" FontWeight="Bold" Height="30"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" HorizontalAlignment="Right" Margin="5,5,10,5">
+                            <TextBlock Text="{Binding CountOfOperations}" FontSize="16" FontWeight="Bold" Height="30"></TextBlock>
+                            <TextBlock Text="{Binding SumOfIncomes}" FontSize="16" FontWeight="Bold" Foreground="Green" Height="30"></TextBlock>
+                            <TextBlock Text="{Binding SumOfWastes}" FontSize="16" FontWeight="Bold" Foreground="Red" Height="30"></TextBlock>
+
+                        </StackPanel>
+                    </Grid>
+                    
+                    
+                </Grid>
+            </Border>
+            <Border BorderBrush="{DynamicResource AverageColor}" BorderThickness="4" Grid.Row="1" Margin="20" CornerRadius="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="150"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" >
+                        <Image Margin="5,0,0,0" Source="D:\2SEM\OOP\kursach\MM-MoneyFy\Pictures\baseline_filter_list_black_24dp.png"  Height="30" Width="30"></Image>
+                        <Label Content="Фильтр" FontSize="20" FontWeight="Bold" Margin="0,5,0,0"></Label>
+
+                    </StackPanel>
+                    <Separator VerticalAlignment="Bottom" Margin="10,10,10,0" BorderBrush="{DynamicResource AverageColor}" Background="{DynamicResource AverageColor}" />
+                    
+                    <StackPanel Grid.Row="1" Margin="5">
+                        <TextBlock Text="Тип операции" FontSize="18" FontWeight="Bold" Height="30"></TextBlock>
+                        <RadioButton GroupName="TypesOfOperations" Content="Все типы" FontSize="16" FontWeight="Bold" Height="30" IsChecked="{Binding ShowAll}"></RadioButton>
+                        <RadioButton GroupName="TypesOfOperations" Content="Доходы" FontSize="16" FontWeight="Bold" Height="30" IsChecked="{Binding ShowIncomes}"></RadioButton>
+                        <RadioButton GroupName="TypesOfOperations" Content="Расходы" FontSize="16" FontWeight="Bold" Height="30" IsChecked="{Binding ShowWastes}"></RadioButton>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2">
+                        <StackPanel Margin="10">
+                            <TextBlock Text="Счёт операции" FontSize="18" FontWeight="DemiBold" ></TextBlock>
+                            <TextBox Text="{Binding SearchByAccount}" materialDesign:ColorZoneAssist.Foreground="{DynamicResource AverageColor}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock Text="Категория операции" FontSize="18" FontWeight="DemiBold" ></TextBlock>
+                            <TextBox Text="{Binding SearchByCategory}" materialDesign:ColorZoneAssist.Foreground="{DynamicResource AverageColor}"></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+        
+    </Grid>
+</Page>

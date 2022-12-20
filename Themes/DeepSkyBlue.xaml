@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+   
+
+    <SolidColorBrush x:Key="LightColor" Color="DeepSkyBlue"/>
+
+    <SolidColorBrush x:Key="DarkColor" Color="#FF008CBA"/>
+
+    <SolidColorBrush x:Key="AverageColor" Color="CadetBlue"/>
+</ResourceDictionary>
